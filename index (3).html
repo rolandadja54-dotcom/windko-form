@@ -1,0 +1,596 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Windko Workforce Program — Interest Form</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Newsreader:opsz,wght@6..72,400;6..72,500;6..72,600&family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#F6F7F9;
+    --surface:#FFFFFF;
+    --panel:#0B1220;
+    --panel-line:rgba(255,255,255,0.10);
+    --ink:#12151C;
+    --ink-soft:#545B6B;
+    --ink-faint:#8890A0;
+    --line:#E4E7ED;
+    --line-strong:#D3D7DF;
+    --primary:#7C3AED;
+    --primary-dark:#5B21B6;
+    --primary-tint:#F1E9FE;
+    --accent:#22D3B4;
+    --accent-tint:#E3FBF5;
+    --danger:#C4432B;
+    --shadow: 0 30px 60px -25px rgba(11,18,32,0.35), 0 8px 20px -12px rgba(11,18,32,0.18);
+  }
+
+  *{box-sizing:border-box;}
+  html,body{margin:0;padding:0;}
+  body{
+    background:var(--bg);
+    background-image:
+      radial-gradient(circle at 10% 0%, rgba(31,76,209,0.06), transparent 45%),
+      radial-gradient(circle at 90% 100%, rgba(14,168,114,0.05), transparent 40%);
+    color:var(--ink);
+    font-family:'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+    -webkit-font-smoothing:antialiased;
+    line-height:1.5;
+    min-height:100vh;
+    padding:48px 20px;
+  }
+
+  h1,h2,h3{
+    font-family:'Newsreader', Georgia, serif;
+    font-weight:500;
+    margin:0;
+    letter-spacing:-0.01em;
+  }
+
+  .wrap{ max-width:1000px; margin:0 auto; }
+
+  .shell{
+    display:grid;
+    grid-template-columns:0.86fr 1.14fr;
+    background:var(--surface);
+    border-radius:20px;
+    overflow:hidden;
+    box-shadow:var(--shadow);
+  }
+
+  /* ---------- Left panel ---------- */
+  .intro{
+    background:
+      radial-gradient(circle at 15% 10%, rgba(167,139,250,0.55), transparent 55%),
+      radial-gradient(circle at 90% 90%, rgba(34,211,180,0.30), transparent 50%),
+      linear-gradient(160deg, #2E1065 0%, #1A0B3D 65%, #120829 100%);
+    color:#FFFFFF;
+    padding:56px 44px;
+    display:flex;
+    flex-direction:column;
+    justify-content:space-between;
+  }
+
+  .mark{
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    font-size:13px;
+    font-weight:600;
+    letter-spacing:0.02em;
+    color:#E9D5FF;
+  }
+  .mark .dot{
+    width:8px;height:8px;border-radius:50%;
+    background:linear-gradient(135deg,#C4B5FD,#22D3B4);
+    box-shadow:0 0 0 4px rgba(196,181,253,0.25);
+  }
+
+  .intro h1{
+    font-size:31px;
+    line-height:1.22;
+    color:#FFFFFF;
+    margin-top:26px;
+    text-shadow:0 2px 24px rgba(124,58,237,0.35);
+  }
+
+  .intro p.lede{
+    font-family:'Inter',sans-serif;
+    color:#EAE2FB;
+    font-size:15.5px;
+    line-height:1.65;
+    margin-top:18px;
+    max-width:40ch;
+  }
+
+  .partner-strip{
+    margin-top:18px;
+    display:flex;
+    flex-wrap:wrap;
+    gap:8px;
+  }
+  .partner-chip{
+    font-size:12.5px;
+    font-weight:700;
+    color:#FFFFFF;
+    background:rgba(196,181,253,0.18);
+    border:1px solid rgba(196,181,253,0.45);
+    border-radius:100px;
+    padding:6px 13px;
+  }
+
+  .eligibility{
+    margin-top:22px;
+    display:inline-flex;
+    align-items:center;
+    gap:9px;
+    padding:9px 14px;
+    background:rgba(255,255,255,0.09);
+    border:1px solid rgba(255,255,255,0.18);
+    border-radius:10px;
+    font-size:12.5px;
+    color:#F4F0FE;
+  }
+
+  .facts{
+    margin-top:28px;
+    display:flex;
+    flex-direction:column;
+    gap:15px;
+  }
+  .fact{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding-bottom:15px;
+    border-bottom:1px solid rgba(255,255,255,0.14);
+  }
+  .fact:last-child{border-bottom:none; padding-bottom:0;}
+  .fact svg{flex:none; margin-top:2px;}
+  .fact-title{font-size:14.5px; font-weight:700; color:#FFFFFF;}
+  .fact-sub{font-size:13px; color:#D4C9F0; margin-top:2px; line-height:1.5;}
+
+  .intro-footer{
+    margin-top:32px;
+    padding-top:20px;
+    border-top:1px solid rgba(255,255,255,0.16);
+    font-size:12.5px;
+    color:#C4B8E0;
+    line-height:1.7;
+  }
+
+  /* ---------- Right panel / form ---------- */
+  .formside{ padding:56px 52px; }
+
+  .formside .eyebrow{ font-size:13px; color:var(--ink-faint); font-weight:500; }
+
+  .formside h2.title{ font-size:25px; margin-top:6px; color:var(--ink); }
+  .formside p.sub{ font-size:14px; color:var(--ink-soft); margin-top:8px; max-width:44ch; }
+
+  form{margin-top:30px;}
+
+  .field{
+    display:flex;
+    flex-direction:column;
+    gap:7px;
+    margin-bottom:18px;
+  }
+  .field:last-child{margin-bottom:0;}
+
+  label{ font-size:13.5px; font-weight:500; color:var(--ink); }
+  label .req{ color:var(--primary); }
+
+  input[type=text], input[type=email], input[type=tel], select{
+    font-family:'Inter',sans-serif;
+    font-size:14.5px;
+    color:var(--ink);
+    background:var(--surface);
+    border:1px solid var(--line-strong);
+    border-radius:10px;
+    padding:12px 13px;
+    width:100%;
+    transition:border-color .15s ease, box-shadow .15s ease;
+  }
+  input::placeholder{color:#AEB4C2;}
+
+  input:focus, select:focus{
+    outline:none;
+    border-color:var(--primary);
+    box-shadow:0 0 0 3.5px var(--primary-tint);
+  }
+
+  select{
+    appearance:none;
+    -webkit-appearance:none;
+    background-image:url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='12' height='8' viewBox='0 0 12 8' fill='none'><path d='M1 1.5L6 6.5L11 1.5' stroke='%23545B6B' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'/></svg>");
+    background-repeat:no-repeat;
+    background-position:right 13px center;
+    padding-right:34px;
+  }
+
+  .grid2{ display:grid; grid-template-columns:1fr 1fr; gap:16px; }
+
+  .field.invalid input, .field.invalid select{ border-color:var(--danger); }
+  .field .error{ display:none; font-size:12px; color:var(--danger); }
+  .field.invalid .error{ display:block; }
+
+  .consent{
+    display:flex;
+    gap:12px;
+    align-items:flex-start;
+    padding:16px;
+    background:#FAFBFD;
+    border:1px solid var(--line);
+    border-radius:12px;
+    margin-top:6px;
+  }
+  .consent input{
+    margin-top:3px;
+    width:17px;
+    height:17px;
+    accent-color:var(--primary);
+    flex:none;
+    cursor:pointer;
+  }
+  .consent label{
+    font-size:13px;
+    font-weight:400;
+    color:var(--ink-soft);
+    line-height:1.55;
+    cursor:pointer;
+  }
+
+  .submit-row{ margin-top:24px; display:flex; flex-direction:column; gap:12px; }
+
+  button.submit{
+    font-family:'Inter',sans-serif;
+    font-size:15px;
+    font-weight:600;
+    color:#fff;
+    background:linear-gradient(135deg, var(--primary), var(--primary-dark));
+    border:none;
+    border-radius:10px;
+    padding:14px 20px;
+    cursor:pointer;
+    transition:transform .12s ease, box-shadow .12s ease, filter .12s ease;
+    box-shadow:0 12px 24px -10px rgba(31,76,209,0.55);
+  }
+  button.submit:hover{filter:brightness(1.05);}
+  button.submit:active{transform:translateY(1px);}
+  button.submit:disabled{opacity:0.6; cursor:not-allowed;}
+
+  .privacy-note{ font-size:12px; color:var(--ink-faint); text-align:center; }
+
+  .submit-error{
+    display:none;
+    font-size:13px;
+    color:var(--danger);
+    background:#FBEDEA;
+    border:1px solid #F1CFC6;
+    border-radius:8px;
+    padding:10px 12px;
+    text-align:center;
+  }
+  .submit-error.show{display:block;}
+
+  /* ---------- Success state ---------- */
+  .success{ display:none; padding:70px 52px; text-align:center; }
+  .success.show{display:block;}
+  .formside.hide{display:none;}
+
+  .success .check{
+    width:56px;height:56px;
+    border-radius:50%;
+    background:var(--accent-tint);
+    display:flex;align-items:center;justify-content:center;
+    margin:0 auto 22px;
+  }
+  .success h2{font-size:23px; color:var(--ink);}
+  .success p{ font-size:14.5px; color:var(--ink-soft); max-width:36ch; margin:14px auto 0; line-height:1.65; }
+  .success .ref{
+    margin-top:26px;
+    display:inline-block;
+    font-size:12.5px;
+    color:var(--ink-faint);
+    background:#F3F4F7;
+    padding:8px 14px;
+    border-radius:8px;
+  }
+
+  @media (max-width: 860px){
+    body{padding:0;}
+    .wrap{max-width:100%;}
+    .shell{border-radius:0; box-shadow:none; grid-template-columns:1fr;}
+    .intro{padding:38px 26px;}
+    .intro h1{font-size:26px;}
+    .formside{padding:36px 22px 44px;}
+    .grid2{grid-template-columns:1fr;}
+    .success{padding:56px 26px;}
+  }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <div class="shell">
+
+    <!-- LEFT: Introduction -->
+    <div class="intro">
+      <div>
+        <span class="mark"><span class="dot"></span>Windko Workforce Program</span>
+        <h1>Get placed with paid AI-training work — no experience required</h1>
+        <p class="lede">Windko is an independent recruiting partner that helps place candidates with AI-training platforms. Leave your details below and our team will personally walk you through signing up and getting started.</p>
+
+        <div class="partner-strip">
+          <span class="partner-chip">Outlier AI</span>
+          <span class="partner-chip">Handshake AI</span>
+        </div>
+
+        <div class="eligibility">
+          <svg width="15" height="15" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="8.3" stroke="#C4B5FD" stroke-width="1.4"/><path d="M10 6v4.2l3 1.8" stroke="#C4B5FD" stroke-width="1.4" stroke-linecap="round"/></svg>
+          Open to residents of the United States, Canada, and Europe
+        </div>
+
+        <div class="facts">
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C4B5FD" stroke-width="1.4"/><path d="M6.5 10.2l2.3 2.3 4.7-5" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <div class="fact-title">Flexible, remote, on your time</div>
+              <div class="fact-sub">Work around your existing schedule — no fixed hours required.</div>
+            </div>
+          </div>
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C4B5FD" stroke-width="1.4"/><path d="M6.5 10.2l2.3 2.3 4.7-5" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <div class="fact-title">Free to apply, always</div>
+              <div class="fact-sub">This is an interest form only. We never ask applicants for payment.</div>
+            </div>
+          </div>
+          <div class="fact">
+            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"><circle cx="10" cy="10" r="9" stroke="#C4B5FD" stroke-width="1.4"/><path d="M6.5 10.2l2.3 2.3 4.7-5" stroke="#C4B5FD" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/></svg>
+            <div>
+              <div class="fact-title">A real person follows up</div>
+              <div class="fact-sub">Our team reviews every submission and reaches out directly by phone or WhatsApp to help you get set up on the platform.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="intro-footer">
+        Takes under a minute. Windko is an independent recruiting partner, not Outlier AI or Handshake AI itself. Your information is used only to evaluate your application and is never sold or shared with third parties.
+      </div>
+    </div>
+
+    <!-- RIGHT: Form -->
+    <div class="formside" id="formside">
+      <span class="eyebrow">Windko Workforce Program</span>
+      <h2 class="title">Leave your details</h2>
+      <p class="sub">A few quick fields — that's all we need to get started.</p>
+
+      <form id="appForm" novalidate>
+
+        <div class="field" data-field="fullName">
+          <label for="fullName">Full name <span class="req">*</span></label>
+          <input type="text" id="fullName" placeholder="Jane Carter" autocomplete="name">
+          <span class="error">Please enter your full name.</span>
+        </div>
+
+        <div class="field" data-field="email">
+          <label for="email">Email <span class="req">*</span></label>
+          <input type="email" id="email" placeholder="jane@email.com" autocomplete="email">
+          <span class="error">Please enter a valid email address.</span>
+        </div>
+
+        <div class="field" data-field="phone">
+          <label for="phone">Phone / WhatsApp number <span class="req">*</span></label>
+          <input type="tel" id="phone" placeholder="+1 555 010 1234" autocomplete="tel">
+          <span class="error">Please enter a phone or WhatsApp number.</span>
+        </div>
+
+        <div class="grid2">
+          <div class="field" data-field="country">
+            <label for="country">Country <span class="req">*</span></label>
+            <select id="country">
+              <option value="" disabled selected>Select your country</option>
+              <option>United States</option>
+              <option>Canada</option>
+              <optgroup label="Europe">
+                <option>United Kingdom</option>
+                <option>Ireland</option>
+                <option>Germany</option>
+                <option>France</option>
+                <option>Spain</option>
+                <option>Portugal</option>
+                <option>Italy</option>
+                <option>Netherlands</option>
+                <option>Belgium</option>
+                <option>Switzerland</option>
+                <option>Austria</option>
+                <option>Sweden</option>
+                <option>Norway</option>
+                <option>Denmark</option>
+                <option>Finland</option>
+                <option>Poland</option>
+                <option>Romania</option>
+                <option>Greece</option>
+                <option>Other European country</option>
+              </optgroup>
+            </select>
+            <span class="error">Please select your country.</span>
+          </div>
+
+          <div class="field" data-field="region">
+            <label for="regionSelect" id="regionLabel">State / Province <span class="req">*</span></label>
+            <select id="regionSelect"><option value="" disabled selected>Select your country first</option></select>
+            <input type="text" id="regionText" placeholder="e.g. Bavaria" style="display:none;">
+            <span class="error">Please select or enter your state / region.</span>
+          </div>
+        </div>
+
+        <div class="field" data-field="consent">
+          <div class="consent">
+            <input type="checkbox" id="consent">
+            <label for="consent">I agree to be contacted by the Windko team about this opportunity via email, phone, or WhatsApp. <span class="req">*</span></label>
+          </div>
+          <span class="error">Please confirm consent to be contacted before submitting.</span>
+        </div>
+
+        <div class="submit-row">
+          <div class="submit-error" id="submitError">Something went wrong submitting your application. Please try again.</div>
+          <button type="submit" class="submit" id="submitBtn">Submit application</button>
+          <div class="privacy-note">We respond to qualified applicants within 3–5 business days.</div>
+        </div>
+
+      </form>
+    </div>
+
+    <!-- Success -->
+    <div class="success" id="successState">
+      <div class="check">
+        <svg width="26" height="26" viewBox="0 0 24 24" fill="none"><path d="M5 12.5l4.5 4.5L19 7" stroke="#0EA872" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/></svg>
+      </div>
+      <h2>You're on the list, <span id="successName">there</span>.</h2>
+      <p>Thanks for reaching out to Windko. Our team will review your details and contact you by phone, WhatsApp, or email if it looks like a good fit.</p>
+      <div class="ref" id="refCode"></div>
+    </div>
+
+  </div>
+</div>
+
+<script>
+  /* =========================================================
+     IMPORTANT — set this to your Google Apps Script Web App
+     URL after you deploy it (see AppsScript-Code.gs).
+     It will look like:
+     https://script.google.com/macros/s/AKfycb.../exec
+     ========================================================= */
+  const SHEET_ENDPOINT_URL = "https://script.google.com/macros/s/AKfycbz7o7HFaQP8awSgKbT7dZe1lBuZhws6H0iow-eBXLIE27uwYyy34eRZGEkE54yyPeRLMA/exec";
+
+  const US_STATES = ["Alabama","Alaska","Arizona","Arkansas","California","Colorado","Connecticut","Delaware","District of Columbia","Florida","Georgia","Hawaii","Idaho","Illinois","Indiana","Iowa","Kansas","Kentucky","Louisiana","Maine","Maryland","Massachusetts","Michigan","Minnesota","Mississippi","Missouri","Montana","Nebraska","Nevada","New Hampshire","New Jersey","New Mexico","New York","North Carolina","North Dakota","Ohio","Oklahoma","Oregon","Pennsylvania","Rhode Island","South Carolina","South Dakota","Tennessee","Texas","Utah","Vermont","Virginia","Washington","West Virginia","Wisconsin","Wyoming"];
+  const CA_PROVINCES = ["Alberta","British Columbia","Manitoba","New Brunswick","Newfoundland and Labrador","Nova Scotia","Ontario","Prince Edward Island","Quebec","Saskatchewan","Northwest Territories","Nunavut","Yukon"];
+
+  const countryEl = document.getElementById('country');
+  const regionSelect = document.getElementById('regionSelect');
+  const regionText = document.getElementById('regionText');
+  const regionLabel = document.getElementById('regionLabel');
+
+  function populateRegion(list, labelText, placeholder){
+    regionLabel.innerHTML = labelText + ' <span class="req">*</span>';
+    regionSelect.innerHTML = '<option value="" disabled selected>' + placeholder + '</option>' + list.map(s => `<option>${s}</option>`).join('');
+    regionSelect.style.display = 'block';
+    regionText.style.display = 'none';
+    regionText.value = '';
+  }
+
+  function useTextRegion(labelText, placeholder){
+    regionLabel.innerHTML = labelText + ' <span class="req">*</span>';
+    regionText.placeholder = placeholder;
+    regionSelect.style.display = 'none';
+    regionText.style.display = 'block';
+    regionSelect.value = '';
+  }
+
+  countryEl.addEventListener('change', function(){
+    const v = countryEl.value;
+    if(v === 'United States'){
+      populateRegion(US_STATES, 'State', 'Select your state');
+    } else if(v === 'Canada'){
+      populateRegion(CA_PROVINCES, 'Province', 'Select your province');
+    } else {
+      useTextRegion('Region', 'e.g. Bavaria, or Île-de-France');
+    }
+    document.querySelector('[data-field="region"]').classList.remove('invalid');
+  });
+
+  const form = document.getElementById('appForm');
+  const formside = document.getElementById('formside');
+  const successState = document.getElementById('successState');
+  const submitBtn = document.getElementById('submitBtn');
+  const submitError = document.getElementById('submitError');
+  const requiredTextFields = ['fullName','email','phone','country'];
+
+  function showError(id, isValid){
+    const field = document.querySelector(`[data-field="${id}"]`);
+    if(!field) return;
+    field.classList.toggle('invalid', !isValid);
+  }
+
+  function isValidEmail(v){ return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v); }
+
+  // Pulls a "source" tag from the URL, e.g. ?src=linkedin, so you can
+  // track which channel each submission came from in the Sheet.
+  function getSourceParam(){
+    const params = new URLSearchParams(window.location.search);
+    return params.get('src') || params.get('source') || 'direct';
+  }
+
+  form.addEventListener('submit', function(e){
+    e.preventDefault();
+    submitError.classList.remove('show');
+    let valid = true;
+
+    requiredTextFields.forEach(id => {
+      const el = document.getElementById(id);
+      const val = el.value.trim();
+      let ok = val.length > 0;
+      if(id === 'email' && ok) ok = isValidEmail(val);
+      showError(id, ok);
+      if(!ok) valid = false;
+    });
+
+    const regionVal = regionSelect.style.display !== 'none' ? regionSelect.value : regionText.value.trim();
+    const regionOk = !!regionVal;
+    showError('region', regionOk);
+    if(!regionOk) valid = false;
+
+    const consent = document.getElementById('consent').checked;
+    showError('consent', consent);
+    if(!consent) valid = false;
+
+    if(!valid){
+      const firstInvalid = document.querySelector('.field.invalid');
+      if(firstInvalid) firstInvalid.scrollIntoView({behavior:'smooth', block:'center'});
+      return;
+    }
+
+    const fullName = document.getElementById('fullName').value.trim();
+    const ref = 'WK-' + Math.random().toString(36).slice(2,8).toUpperCase();
+
+    const payload = {
+      fullName: fullName,
+      email: document.getElementById('email').value.trim(),
+      phone: document.getElementById('phone').value.trim(),
+      country: countryEl.value,
+      region: regionVal,
+      reference: ref,
+      source: getSourceParam()
+    };
+
+    submitBtn.disabled = true;
+    submitBtn.textContent = 'Submitting…';
+
+    fetch(SHEET_ENDPOINT_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'text/plain;charset=utf-8' }, // avoids CORS preflight with Apps Script
+      body: JSON.stringify(payload)
+    })
+    .then(function(){
+      const name = fullName.split(' ')[0];
+      document.getElementById('successName').textContent = name || 'there';
+      document.getElementById('refCode').textContent = 'Reference ' + ref;
+      formside.classList.add('hide');
+      successState.classList.add('show');
+    })
+    .catch(function(err){
+      console.error('Submission error:', err);
+      submitError.classList.add('show');
+      submitBtn.disabled = false;
+      submitBtn.textContent = 'Submit application';
+    });
+  });
+</script>
+
+</body>
+</html>
